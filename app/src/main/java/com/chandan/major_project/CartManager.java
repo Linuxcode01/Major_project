@@ -1,6 +1,7 @@
 package com.chandan.major_project;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CartManager {
     private static CartManager instance;
@@ -16,6 +17,9 @@ public class CartManager {
     }
 
     public void addItem(ItemPOJO item) {
+//        if(!cartItems.contains(item)){
+//            cartItems.add(item);
+//        }
         cartItems.add(item);
     }
 
@@ -31,7 +35,19 @@ public class CartManager {
         return total;
     }
 
-    public void clearCart() {
-        cartItems.clear();
+    public void deleteCart(ItemPOJO itemPOJO) {
+        cartItems.remove(itemPOJO);
+    }
+
+    public int getQuantity(){
+        int total = 0;
+        for (int i = 0; i < cartItems.size(); i++){
+            for (int j = 1; j < cartItems.size(); j++){
+                if(Objects.equals(cartItems.get(i), cartItems.get(j))){
+                    total++;
+                }
+            }
+        }
+        return total;
     }
 }

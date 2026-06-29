@@ -17,6 +17,11 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.Holder> {
 
     ArrayList<ItemPOJO> itemPOJOArrayList;
+
+    {
+        ProductManager.getInstance();
+    }
+
     OnAddToCartListener listener;
 
     public interface OnAddToCartListener {

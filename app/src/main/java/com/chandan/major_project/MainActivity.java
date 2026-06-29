@@ -104,11 +104,23 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        ArrayList<ItemPOJO> itemPOJOS = new ArrayList<>();
-        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"person","120"));
-        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"person","120"));
-        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"person","120"));
-        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"person","120"));
+
+        ArrayList<ItemPOJO> itemPOJOS = ProductManager.getInstance().getProductItem();
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Nokia 512 ","35000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120500"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Motorola rar","85000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Iphone 16","120000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Nokia 512 ","35000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120500"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Motorola rar","85000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Iphone 16","120000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Nokia 512 ","35000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Sumsang S24","120500"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Motorola rar","85000"));
+        itemPOJOS.add(new ItemPOJO(R.drawable.profile,"Iphone 16","120000"));
 
         recyclerView = findViewById(R.id.recyclerView);
 

@@ -42,17 +42,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
         holder.product_price.setText(cartArr.get(position).getProductPrice());
         holder.imageView.setImageResource(cartArr.get(position).getProductImage());
 
-        holder.quantity.setText("1");
-//        holder.imageButton.setOnClickListener(v -> {
-//            int currentPosition = holder.getAdapterPosition();
-//            if (currentPosition != RecyclerView.NO_ID) {
-//                CartManager.getInstance().getCartItems().remove(currentPosition);
-//                cartArr.remove(currentPosition);
-//                notifyItemRemoved(currentPosition);
-//
-//                Toast.makeText(v.getContext(), "Item removed", LENGTH_LONG).show();
-//            }
-//        });
+        holder.quantity.setText(String.valueOf(CartManager.getInstance().getQuantity()));
 
         holder.imageButton.setOnClickListener(v -> {
             int currentPosition = holder.getAdapterPosition();
@@ -60,7 +50,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
                 CartManager.getInstance().getCartItems().remove(currentPosition);
                 cartArr.remove(currentPosition);
                 notifyItemRemoved(currentPosition);
-                if (cartListener != null) cartListener.onItemRemoved(); // price update trigger
+                if (cartListener != null) cartListener.onItemRemoved();
             }
         });
 
@@ -78,7 +68,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
         ImageButton imageButton;
         public Holder(@NonNull View itemView) {
             super(itemView);
-
             imageView = itemView.findViewById(R.id.product_image_cart);
             product_name = itemView.findViewById(R.id.product_name_cart);
             product_price = itemView.findViewById(R.id.product_price_cart);
