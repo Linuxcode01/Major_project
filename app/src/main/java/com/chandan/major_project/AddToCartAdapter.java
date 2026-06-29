@@ -42,16 +42,21 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
         holder.product_price.setText(cartArr.get(position).getProductPrice());
         holder.imageView.setImageResource(cartArr.get(position).getProductImage());
 
-        holder.quantity.setText(String.valueOf(CartManager.getInstance().getQuantity()));
+        holder.quantity.setText(String.valueOf(cartArr.get(position).getQuantity()));
 
         holder.imageButton.setOnClickListener(v -> {
             int currentPosition = holder.getAdapterPosition();
-            if (currentPosition != RecyclerView.NO_ID) {
-                CartManager.getInstance().getCartItems().remove(currentPosition);
-                cartArr.remove(currentPosition);
+            if (currentPosition == RecyclerView.NO_ID) return;
+
+            CartManager.getInstance().removeItem(currentPosition);
+
+            if (currentPosition >= cartArr.size()) {
                 notifyItemRemoved(currentPosition);
-                if (cartListener != null) cartListener.onItemRemoved();
+            } else {
+                notifyItemChanged(currentPosition);
             }
+
+            if (cartListener != null) cartListener.onItemRemoved();
         });
 
     }

@@ -17,9 +17,13 @@ public class CartManager {
     }
 
     public void addItem(ItemPOJO item) {
-//        if(!cartItems.contains(item)){
-//            cartItems.add(item);
-//        }
+        for (ItemPOJO existing : cartItems) {
+            if (existing.getProductName().equals(item.getProductName())) {
+                existing.incrementQuantity();
+                return;
+            }
+        }
+        item.setQuantity(1);
         cartItems.add(item);
     }
 
@@ -30,13 +34,19 @@ public class CartManager {
     public int getTotalPrice() {
         int total = 0;
         for (ItemPOJO item : cartItems) {
-            total += Integer.parseInt(item.getProductPrice());
+            total += Integer.parseInt(item.getProductPrice()) * item.getQuantity();
         }
         return total;
     }
 
-    public void deleteCart(ItemPOJO itemPOJO) {
-        cartItems.remove(itemPOJO);
+    public void removeItem(int position) {
+        if (position < 0 || position >= cartItems.size()) return;
+        ItemPOJO item = cartItems.get(position);
+        if (item.getQuantity() > 1) {
+            item.decrementQuantity();
+        } else {
+            cartItems.remove(position);
+        }
     }
 
     public int getQuantity(){
