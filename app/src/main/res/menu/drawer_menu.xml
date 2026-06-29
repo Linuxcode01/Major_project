@@ -17,7 +17,7 @@
     <item
         android:title="Account"/>
 
-    <group>
+    <group android:id="@+id/group2">
             <item
                 android:title="Logout"
                 android:id="@+id/logout"/>

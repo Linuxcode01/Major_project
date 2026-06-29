@@ -19,6 +19,12 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
 
     ArrayList<ItemPOJO> cartArr;
 
+    public interface OnCartChangeListener {
+        void onItemRemoved();
+    }
+
+    OnCartChangeListener cartListener;
+
     public AddToCartAdapter(ArrayList<ItemPOJO> cartArr) {
         this.cartArr = cartArr;
     }
@@ -37,9 +43,25 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.Hold
         holder.imageView.setImageResource(cartArr.get(position).getProductImage());
 
         holder.quantity.setText("1");
+//        holder.imageButton.setOnClickListener(v -> {
+//            int currentPosition = holder.getAdapterPosition();
+//            if (currentPosition != RecyclerView.NO_ID) {
+//                CartManager.getInstance().getCartItems().remove(currentPosition);
+//                cartArr.remove(currentPosition);
+//                notifyItemRemoved(currentPosition);
+//
+//                Toast.makeText(v.getContext(), "Item removed", LENGTH_LONG).show();
+//            }
+//        });
+
         holder.imageButton.setOnClickListener(v -> {
-            cartArr.remove(cartArr.get(position));
-            Toast.makeText(v.getContext(),"clicked item", LENGTH_LONG).show();
+            int currentPosition = holder.getAdapterPosition();
+            if (currentPosition != RecyclerView.NO_ID) {
+                CartManager.getInstance().getCartItems().remove(currentPosition);
+                cartArr.remove(currentPosition);
+                notifyItemRemoved(currentPosition);
+                if (cartListener != null) cartListener.onItemRemoved(); // price update trigger
+            }
         });
 
     }

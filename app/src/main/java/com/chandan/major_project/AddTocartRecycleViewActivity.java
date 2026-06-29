@@ -30,25 +30,19 @@ public class AddTocartRecycleViewActivity extends AppCompatActivity {
             return insets;
         });
 
-
-        ArrayList<ItemPOJO> cartArr = new ArrayList<>();
-
-        cartArr.add(new ItemPOJO(R.drawable.profile,"Person" ,"120"));
-        cartArr.add(new ItemPOJO(R.drawable.delete_icon,"Person-delete" ,"320"));
-
         total_price_view = findViewById(R.id.total_price);
-
-        int totalPrice = 0;
-
-        for (ItemPOJO item : cartArr) {
-            totalPrice += Integer.parseInt(item.getProductPrice());
-        }
-
-        total_price_view.setText(String.valueOf(totalPrice));
-
         recyclerView = findViewById(R.id.recyclerViewCart);
+
+        ArrayList<ItemPOJO> cartItems = CartManager.getInstance().getCartItems();
+
+        total_price_view.setText(String.valueOf(CartManager.getInstance().getTotalPrice()));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        AddToCartAdapter addToCartAdapter = new AddToCartAdapter(cartArr);
+
+        AddToCartAdapter addToCartAdapter = new AddToCartAdapter(cartItems);
+        addToCartAdapter.cartListener = () -> {
+            total_price_view.setText(String.valueOf(CartManager.getInstance().getTotalPrice()));
+        };
         recyclerView.setAdapter(addToCartAdapter);
 
     }
